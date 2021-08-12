@@ -1,15 +1,41 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>CRUD</title>
 </head>
 <body>
-<div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
-</div>
+
+
+<table >
+
+    <thead>
+    <tr >
+        <th style="padding-right: 50px; padding-bottom: 20px">Имя</th>
+        <th style="padding-right: 20px; padding-bottom: 20px">Фамилия</th>
+
+        <th style="padding-right: 20px; padding-bottom: 20px">info</th>
+        <th style="padding-right: 20px; padding-bottom: 20px">edit</th>
+        <th style="padding-right: 20px; padding-bottom: 20px">удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${list}">
+        <td style="padding-right: 50px"  th:text="${user.getName()}"></td>
+        <td style="padding-right: 20px" th:text="${user.getSurname()}"></td>
+
+        <td style="padding-right: 20px" ><a th:href="@{/{count}(count=${user.getCount()})}">show</a> </td>
+        <td style="padding-right: 20px" ><a th:href="@{/{count}/edit(count=${user.getCount()})}">edit</a> </td>
+        <td style="padding-right: 20px" ><form th:method="POST" th:action="@{/{count}/delete(count=${user.getCount()})}">
+            <input type="submit" value="delete"/>
+        </form></td>
+    </tr>
+    </tbody>
+
+</table>
+
+<h2><a href="/new">Добавить нового пользователя &gt&gt&gt</a></h2>
+
 </body>
 </html>
